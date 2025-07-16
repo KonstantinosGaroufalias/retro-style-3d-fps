@@ -2,7 +2,7 @@ extends Node3D
 
 @export var max_health = 100
 @onready var cur_health = max_health
-@export var gib_at = -10 #sets damage dealt to character
+@export var gib_at = -10
 @export var verbose = false
 
 signal died
@@ -38,3 +38,11 @@ func heal(amount: int):
 	health_changed.emit(cur_health, max_health)
 	if verbose:
 		print("healed for %s, health: %s/%s" % [amount, cur_health, max_health])
+
+
+func test_damage():
+	var d = DamageData.new()
+	d.amount = 30
+	hurt(d)
+	
+	
