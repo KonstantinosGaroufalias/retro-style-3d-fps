@@ -306,6 +306,7 @@ libraries = {
 }
 
 [node name="MachineGun" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
+visible = false
 script = ExtResource("4_lnn3y")
 automatic = true
 attack_rate = 0.1
@@ -328,12 +329,11 @@ libraries = {
 }
 
 [node name="BulletEmitter" parent="Camera3D/WeaponManager/Weapons/MachineGun" instance=ExtResource("6_udiip")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, -0.340492, 0.124411)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 0, 0)
 
 [node name="HitScanBulletEmitter" parent="Camera3D/WeaponManager/Weapons/MachineGun/BulletEmitter" instance=ExtResource("8_k1n4w")]
 
 [node name="Shotgun" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
-visible = false
 script = ExtResource("4_lnn3y")
 attack_rate = 1.0
 
@@ -354,7 +354,6 @@ libraries = {
 }
 
 [node name="BulletEmitter" parent="Camera3D/WeaponManager/Weapons/Shotgun" instance=ExtResource("6_udiip")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68001, -0.408535, 0.209534)
 
 [node name="BurstEmitter" parent="Camera3D/WeaponManager/Weapons/Shotgun/BulletEmitter" instance=ExtResource("11_txht7")]
 

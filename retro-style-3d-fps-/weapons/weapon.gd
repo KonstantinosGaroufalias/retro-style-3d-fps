@@ -2,14 +2,13 @@ extends Node3D
 
 class_name Weapon
 
-@onready var animation_player: AnimationPlayer = $Graphics/AnimationPlayer
-@onready var bullet_emitter: BulletEmitter = $BulletEmitter
-@onready var fire_point: Node3D = %FirePoint
+@onready var animation_player :AnimationPlayer = $Graphics/AnimationPlayer
+@onready var bullet_emitter : BulletEmitter = $BulletEmitter
+@onready var fire_point : Node3D = %FirePoint
 
 @export var automatic = false
 
 @export var damage = 5
-# set to - if inf ammo weapon like machete
 @export var ammo = 30
 
 @export var attack_rate = 0.2
@@ -20,16 +19,16 @@ signal out_of_ammo
 
 func _ready():
 	bullet_emitter.set_damage(damage)
-	
+
 func set_bodies_to_exclude(bodies: Array):
 	bullet_emitter.set_bodies_to_exclude(bodies)
-	
+
 func attack(input_just_pressed: bool, input_held: bool):
-	if automatic and input_just_pressed:
+	if !automatic and !input_just_pressed:
 		return
 	if automatic and !input_held:
 		return
-		
+	
 	if ammo == 0:
 		if input_just_pressed:
 			out_of_ammo.emit()
@@ -49,8 +48,8 @@ func attack(input_just_pressed: bool, input_held: bool):
 	animation_player.play("shoot")
 	if has_node("Graphics/MuzzleFlash"):
 		$Graphics/MuzzleFlash.flash()
-	
-func set_active(a:bool):
+
+func set_active(a: bool):
 	visible = a
 	if !a:
 		animation_player.play("RESET")

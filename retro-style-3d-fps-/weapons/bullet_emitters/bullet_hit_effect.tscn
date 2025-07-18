@@ -62,7 +62,6 @@ rings = 3
 
 [node name="SparkParticles" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_15ka3")
-emitting = false
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
@@ -70,7 +69,6 @@ process_material = SubResource("ParticleProcessMaterial_npuj2")
 draw_pass_1 = SubResource("QuadMesh_tfvud")
 
 [node name="SmokeParticles" type="GPUParticles3D" parent="."]
-emitting = false
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
