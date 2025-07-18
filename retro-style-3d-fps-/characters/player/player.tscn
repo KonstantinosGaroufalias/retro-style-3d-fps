@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ch0oyqu7h8xkb"]
+[gd_scene load_steps=30 format=3 uid="uid://ch0oyqu7h8xkb"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_n0jxg"]
 [ext_resource type="Script" path="res://characters/player/weapons_manager.gd" id="2_dwjd2"]
@@ -6,11 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://cfwy8adq8cpc7" path="res://weapons/assets/machete.glb" id="3_bl8av"]
 [ext_resource type="PackedScene" uid="uid://bg6rhdc2ketk2" path="res://weapons/assets/machinegun.glb" id="3_idi6v"]
 [ext_resource type="Script" path="res://characters/character_mover.gd" id="3_kasqi"]
+[ext_resource type="Script" path="res://weapons/weapon.gd" id="4_lnn3y"]
 [ext_resource type="PackedScene" uid="uid://c1mtqpil7ainc" path="res://characters/health_manager.tscn" id="4_ve1ay"]
 [ext_resource type="PackedScene" uid="uid://c1fqrl11sqrqy" path="res://weapons/assets/rocketlauncher.glb" id="5_1ipjr"]
 [ext_resource type="Script" path="res://characters/health_manager.gd" id="5_xsyuv"]
 [ext_resource type="PackedScene" uid="uid://yakgrjc51jo0" path="res://weapons/assets/shotgun.glb" id="6_pfbcn"]
-[ext_resource type="Script" path="res://weapons/bullet_emitters/bullet_emitter.gd" id="7_13ipf"]
+[ext_resource type="PackedScene" uid="uid://c5wg4gnyejteh" path="res://weapons/bullet_emitters/bullet_emitter.tscn" id="6_udiip"]
+[ext_resource type="PackedScene" uid="uid://dc8jtslyg1ebb" path="res://effects/muzzle_flash/muzzle_flash.tscn" id="6_y24si"]
+[ext_resource type="PackedScene" uid="uid://d311ewusfl6en" path="res://effects/muzzle_flash/assets/muzzleflash1.glb" id="7_kh7tx"]
 [ext_resource type="PackedScene" uid="uid://bb6bfvnmtsadm" path="res://weapons/bullet_emitters/hit_scan_bullet_emitter.tscn" id="8_k1n4w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mkonh"]
@@ -47,7 +50,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_52osc"]
 resource_name = "attack"
 length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -76,7 +78,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqq6u"]
 _data = {
 "RESET": SubResource("Animation_ui8vf"),
-"attack": SubResource("Animation_52osc")
+"shoot": SubResource("Animation_52osc")
 }
 
 [sub_resource type="Animation" id="Animation_73ub8"]
@@ -109,7 +111,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_ada6n"]
 resource_name = "shoot"
 length = 0.1
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -170,7 +171,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_d7wtg"]
 resource_name = "shoot"
-loop_mode = 1
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -232,7 +232,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_m4gbu"]
 resource_name = "shoot"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -281,6 +280,9 @@ skeleton = NodePath("../CollisionShape3D")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
+[node name="FirePoint" type="Node3D" parent="Camera3D"]
+unique_name_in_owner = true
+
 [node name="WeaponManager" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.705974)
 script = ExtResource("2_dwjd2")
@@ -300,13 +302,20 @@ root_node = NodePath("../Machete")
 libraries = {
 "": SubResource("AnimationLibrary_yqq6u")
 }
-autoplay = "attack"
 
 [node name="MachineGun" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
-visible = false
+script = ExtResource("4_lnn3y")
+automatic = true
+attack_rate = 0.1
 
 [node name="Graphics" type="Node3D" parent="Camera3D/WeaponManager/Weapons/MachineGun"]
 transform = Transform3D(0.385, 0, 0, 0, 0.385, 0, 0, 0, 0.385, 0.413209, -0.517392, -0.0468996)
+
+[node name="MuzzleFlash" parent="Camera3D/WeaponManager/Weapons/MachineGun/Graphics" instance=ExtResource("6_y24si")]
+transform = Transform3D(2.63875, 0, 0, 0, 1.7467, 0, 0, 0, 2.57143, 0.692001, 0.507464, -3.56726)
+
+[node name="muzzleflash1" parent="Camera3D/WeaponManager/Weapons/MachineGun/Graphics/MuzzleFlash" instance=ExtResource("7_kh7tx")]
+transform = Transform3D(-0.425, 0, 6.41732e-08, 0, 0.425, 0, -6.41732e-08, 0, -0.425, 0, 0, 0.139862)
 
 [node name="MachineGun" parent="Camera3D/WeaponManager/Weapons/MachineGun/Graphics" instance=ExtResource("3_idi6v")]
 transform = Transform3D(1.87013, 0, 0, 0, 1.87013, 0, 0, 0, 1.87013, 0.696182, -0.0950782, -0.0529344)
@@ -315,7 +324,11 @@ transform = Transform3D(1.87013, 0, 0, 0, 1.87013, 0, 0, 0, 1.87013, 0.696182, -
 libraries = {
 "": SubResource("AnimationLibrary_akwom")
 }
-autoplay = "shoot"
+
+[node name="BulletEmitter" parent="Camera3D/WeaponManager/Weapons/MachineGun" instance=ExtResource("6_udiip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 0, 0)
+
+[node name="HitScanBulletEmitter" parent="Camera3D/WeaponManager/Weapons/MachineGun/BulletEmitter" instance=ExtResource("8_k1n4w")]
 
 [node name="Shotgun" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 visible = false
@@ -329,7 +342,6 @@ transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0.681239, -0.553997,
 libraries = {
 "": SubResource("AnimationLibrary_p6li5")
 }
-autoplay = "shoot"
 
 [node name="RocketLauncher" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.103958, 0, -0.434381)
@@ -344,15 +356,6 @@ transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, 0.908544, -0.7201
 libraries = {
 "": SubResource("AnimationLibrary_vm8f4")
 }
-autoplay = "shoot"
-
-[node name="BulletEmitter" type="Node3D" parent="Camera3D"]
-script = ExtResource("7_13ipf")
-
-[node name="Timer" type="Timer" parent="Camera3D/BulletEmitter"]
-autostart = true
-
-[node name="HitScanBulletEmitter" parent="Camera3D/BulletEmitter" instance=ExtResource("8_k1n4w")]
 
 [node name="CharacterMover" parent="." instance=ExtResource("2_ksela")]
 script = ExtResource("3_kasqi")
@@ -361,5 +364,3 @@ stop_drag = 0.15
 [node name="HealthManager" parent="." instance=ExtResource("4_ve1ay")]
 script = ExtResource("5_xsyuv")
 verbose = true
-
-[connection signal="timeout" from="Camera3D/BulletEmitter/Timer" to="Camera3D/BulletEmitter" method="fire"]
