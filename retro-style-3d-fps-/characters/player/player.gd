@@ -72,3 +72,6 @@ func kill():
 
 func heal() -> void:
 	pass # Replace with function body.
+
+func hurt(damage_data: DamageData):
+	health_manager.hurt(damage_data)
