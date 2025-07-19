@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ch0oyqu7h8xkb"]
+[gd_scene load_steps=35 format=3 uid="uid://ch0oyqu7h8xkb"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_n0jxg"]
 [ext_resource type="Script" path="res://characters/player/weapons_manager.gd" id="2_dwjd2"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://yu6miwctdlpc" path="res://weapons/bullet_emitters/burst_emitter.tscn" id="11_txht7"]
 [ext_resource type="PackedScene" uid="uid://b7oqitiwylshk" path="res://weapons/bullet_emitters/spray_emitter.tscn" id="12_y7v67"]
 [ext_resource type="PackedScene" uid="uid://2iq8r8cwtwbn" path="res://effects/muzzle_flash/assets/muzzleflash2.glb" id="15_oem8n"]
+[ext_resource type="PackedScene" uid="uid://bfoce5tairg7y" path="res://weapons/bullet_emitters/projectile_emitter.tscn" id="16_qakut"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mkonh"]
 
@@ -420,7 +421,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.
 
 [node name="BulletEmitter" parent="Camera3D/WeaponManager/Weapons/RocketLauncher" instance=ExtResource("6_udiip")]
 
-[node name="HitScanBulletEmitter" parent="Camera3D/WeaponManager/Weapons/RocketLauncher/BulletEmitter" instance=ExtResource("8_k1n4w")]
+[node name="ProjectileEmitter" parent="Camera3D/WeaponManager/Weapons/RocketLauncher/BulletEmitter" instance=ExtResource("16_qakut")]
 
 [node name="CharacterMover" parent="." instance=ExtResource("2_ksela")]
 script = ExtResource("3_kasqi")

@@ -83,7 +83,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.441, 0.758559, 0)
 
 [node name="dummy" type="StaticBody3D" parent="."]
 transform = Transform3D(4.22, 0, 0, 0, 4.22, 0, 0, 0, 4.22, 30.1399, 2.10329, 0)
-collision_layer = 2
+collision_layer = 6
 collision_mask = 0
 script = ExtResource("6_slj3b")
 verbose = true
