@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ch0oyqu7h8xkb"]
+[gd_scene load_steps=32 format=3 uid="uid://ch0oyqu7h8xkb"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_n0jxg"]
 [ext_resource type="Script" path="res://characters/player/weapons_manager.gd" id="2_dwjd2"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://c1mtqpil7ainc" path="res://characters/health_manager.tscn" id="4_ve1ay"]
 [ext_resource type="PackedScene" uid="uid://c1fqrl11sqrqy" path="res://weapons/assets/rocketlauncher.glb" id="5_1ipjr"]
 [ext_resource type="Script" path="res://characters/health_manager.gd" id="5_xsyuv"]
-[ext_resource type="PackedScene" uid="uid://c3tr07xydda6a" path="res://weapons/bullet_emitters/area_damage_emitter.tscn" id="6_nlrog"]
 [ext_resource type="PackedScene" uid="uid://yakgrjc51jo0" path="res://weapons/assets/shotgun.glb" id="6_pfbcn"]
 [ext_resource type="PackedScene" uid="uid://c5wg4gnyejteh" path="res://weapons/bullet_emitters/bullet_emitter.tscn" id="6_udiip"]
 [ext_resource type="PackedScene" uid="uid://dc8jtslyg1ebb" path="res://effects/muzzle_flash/muzzle_flash.tscn" id="6_y24si"]
@@ -18,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://bb6bfvnmtsadm" path="res://weapons/bullet_emitters/hit_scan_bullet_emitter.tscn" id="8_k1n4w"]
 [ext_resource type="PackedScene" uid="uid://yu6miwctdlpc" path="res://weapons/bullet_emitters/burst_emitter.tscn" id="11_txht7"]
 [ext_resource type="PackedScene" uid="uid://b7oqitiwylshk" path="res://weapons/bullet_emitters/spray_emitter.tscn" id="12_y7v67"]
-[ext_resource type="PackedScene" uid="uid://2iq8r8cwtwbn" path="res://effects/muzzle_flash/assets/muzzleflash2.glb" id="15_oem8n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mkonh"]
 
@@ -77,20 +75,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.453064, -0.829709, -0.622644), Vector3(-0.411547, 1.8584, -1.71845), Vector3(0, 0, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../..")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"actually_attack"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqq6u"]
@@ -309,11 +293,6 @@ script = ExtResource("2_dwjd2")
 
 [node name="Machete" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 visible = false
-script = ExtResource("4_lnn3y")
-damage = 10
-ammo = -1
-attack_rate = 0.4
-animation_controlled_attack = true
 
 [node name="Graphics" type="Node3D" parent="Camera3D/WeaponManager/Weapons/Machete"]
 
@@ -326,19 +305,7 @@ libraries = {
 "": SubResource("AnimationLibrary_yqq6u")
 }
 
-[node name="BulletEmitter" parent="Camera3D/WeaponManager/Weapons/Machete" instance=ExtResource("6_udiip")]
-
-[node name="AreaDamageEmitter" parent="Camera3D/WeaponManager/Weapons/Machete/BulletEmitter" instance=ExtResource("6_nlrog")]
-offset_by_radius = true
-
-[node name="HitScanBulletEmitter" parent="Camera3D/WeaponManager/Weapons/Machete/BulletEmitter" instance=ExtResource("8_k1n4w")]
-only_hit_environment = true
-
-[node name="RayCast3D" parent="Camera3D/WeaponManager/Weapons/Machete/BulletEmitter/HitScanBulletEmitter" index="0"]
-target_position = Vector3(0, 0, -2)
-
 [node name="MachineGun" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
-visible = false
 script = ExtResource("4_lnn3y")
 automatic = true
 attack_rate = 0.1
@@ -397,10 +364,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68001, -0.408535, 0.209534)
 
 [node name="RocketLauncher" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.103958, 0, -0.434381)
-script = ExtResource("4_lnn3y")
-damage = 40
-ammo = 10
-attack_rate = 0.8
+visible = false
 
 [node name="Graphics" type="Node3D" parent="Camera3D/WeaponManager/Weapons/RocketLauncher"]
 
@@ -412,16 +376,6 @@ libraries = {
 "": SubResource("AnimationLibrary_vm8f4")
 }
 
-[node name="MuzzleFlash" parent="Camera3D/WeaponManager/Weapons/RocketLauncher/Graphics" instance=ExtResource("6_y24si")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.924481, -0.319166, -1.78843)
-
-[node name="muzzleflash2" parent="Camera3D/WeaponManager/Weapons/RocketLauncher/Graphics/MuzzleFlash" instance=ExtResource("15_oem8n")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.033017, 0.280646)
-
-[node name="BulletEmitter" parent="Camera3D/WeaponManager/Weapons/RocketLauncher" instance=ExtResource("6_udiip")]
-
-[node name="HitScanBulletEmitter" parent="Camera3D/WeaponManager/Weapons/RocketLauncher/BulletEmitter" instance=ExtResource("8_k1n4w")]
-
 [node name="CharacterMover" parent="." instance=ExtResource("2_ksela")]
 script = ExtResource("3_kasqi")
 stop_drag = 0.15
@@ -429,5 +383,3 @@ stop_drag = 0.15
 [node name="HealthManager" parent="." instance=ExtResource("4_ve1ay")]
 script = ExtResource("5_xsyuv")
 verbose = true
-
-[editable path="Camera3D/WeaponManager/Weapons/Machete/BulletEmitter/HitScanBulletEmitter"]
