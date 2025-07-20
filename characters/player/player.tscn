@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ch0oyqu7h8xkb"]
+[gd_scene load_steps=44 format=3 uid="uid://ch0oyqu7h8xkb"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_n0jxg"]
 [ext_resource type="Script" path="res://characters/player/weapons_manager.gd" id="2_dwjd2"]
@@ -324,7 +324,13 @@ _data = {
 "moving": SubResource("Animation_o4d5l")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_e1a4a"]
+radius = 15.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d6i3i"]
+radius = 50.0
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 6
 collision_mask = 3
 script = ExtResource("1_n0jxg")
@@ -357,6 +363,7 @@ damage = 10
 ammo = -1
 attack_rate = 0.4
 animation_controlled_attack = true
+silent_weapon = true
 
 [node name="Graphics" type="Node3D" parent="Camera3D/WeaponManager/Weapons/Machete"]
 
@@ -539,6 +546,24 @@ root_node = NodePath("../Weapons")
 libraries = {
 "": SubResource("AnimationLibrary_w05ig")
 }
+
+[node name="NearbyMonstersAlertAreaSmall" type="Area3D" parent="Camera3D/WeaponManager"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/WeaponManager/NearbyMonstersAlertAreaSmall"]
+shape = SubResource("SphereShape3D_e1a4a")
+
+[node name="NearbyMonstersAlertAreaLarge" type="Area3D" parent="Camera3D/WeaponManager"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/WeaponManager/NearbyMonstersAlertAreaLarge"]
+shape = SubResource("SphereShape3D_d6i3i")
+
+[node name="LOSRayCast3D" type="RayCast3D" parent="Camera3D/WeaponManager"]
 
 [node name="CharacterMover" parent="." instance=ExtResource("2_ksela")]
 script = ExtResource("3_kasqi")

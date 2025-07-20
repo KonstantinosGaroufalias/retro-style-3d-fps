@@ -5,9 +5,14 @@ var weapons_unlocked = []
 var cur_slot = 0
 var cur_weapon = null
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var nearby_monsters_alert_area_small: Area3D = $NearbyMonstersAlertAreaSmall
+@onready var nearby_monsters_alert_area_large: Area3D = $NearbyMonstersAlertAreaLarge
+@onready var los_ray_cast_3d: RayCast3D = $LOSRayCast3D
 
 func _ready():
 	for weapon in weapons:
+		if !weapon.silent_weapon:
+			weapon.fired.connect(alert_enemies_on_fired)
 		if weapon.has_method("set_bodies_to_exclude"):
 			weapon.set_bodies_to_exclude([get_parent().get_parent()])
 	disable_all_weapons()
@@ -61,3 +66,15 @@ func update_animation(velocity: Vector3, grounded: bool):
 	else:
 		animation_player.play("moving")
 		
+		
+func alert_enemies_on_fired():
+	for monster in nearby_monsters_alert_area_small.get_overlapping_bodies():
+		if monster is Monster:
+			los_ray_cast_3d.enabled = true
+			
+			los_ray_cast_3d.target_position = to_local(monster.vision_manager.global_position)
+			los_ray_cast_3d.force_raycast_update()
+			if !los_ray_cast_3d.is_colliding():
+				monster.alert()
+			los_ray_cast_3d.enabled = false
+			

@@ -27,12 +27,14 @@ height = 0.562693
 radius = 0.0803017
 height = 0.592135
 
-[node name="ReptileMonster" instance=ExtResource("1_6nccq")]
+[node name="ReptileMonster" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_6nccq")]
+animation_player = NodePath("Graphics/reptilemonster/AnimationPlayer")
 
 [node name="HealthManager" parent="." index="0"]
 max_health = 500
 
 [node name="reptilemonster" parent="Graphics" index="0" instance=ExtResource("2_q7nt7")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Graphics/reptilemonster/Armature" index="0"]
 bones/0/position = Vector3(2.84689e-18, 0.948998, -0.0952437)

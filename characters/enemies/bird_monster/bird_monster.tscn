@@ -26,15 +26,19 @@ height = 0.363538
 radius = 0.0942623
 height = 0.572738
 
-[node name="BirdMonster" instance=ExtResource("1_l05yc")]
+[node name="BirdMonster" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_l05yc")]
+animation_player = NodePath("Graphics/birdmonster/AnimationPlayer")
 
 [node name="HealthManager" parent="." index="0"]
 max_health = 500
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.04458, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04458, 0)
 
 [node name="birdmonster" parent="Graphics" index="0" instance=ExtResource("2_g8epu")]
+
+[node name="Armature" parent="Graphics/birdmonster" index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Graphics/birdmonster/Armature" index="0"]
 bones/1/rotation = Quaternion(0.0908184, 1.18717e-07, 1.08264e-08, 0.995867)
