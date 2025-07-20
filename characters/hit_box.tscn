@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://chvuni7rsqm0s"]
+
+[ext_resource type="Script" path="res://characters/hit_box.gd" id="1_uas3d"]
+
+[node name="HitBox" type="Area3D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_uas3d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
