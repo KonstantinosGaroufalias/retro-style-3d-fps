@@ -30,9 +30,6 @@ height = 0.592135
 [node name="ReptileMonster" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_6nccq")]
 animation_player = NodePath("Graphics/reptilemonster/AnimationPlayer")
 
-[node name="HealthManager" parent="." index="0"]
-max_health = 500
-
 [node name="reptilemonster" parent="Graphics" index="0" instance=ExtResource("2_q7nt7")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
@@ -59,7 +56,7 @@ shape = SubResource("CapsuleShape3D_dtp5m")
 weak_spot = true
 
 [node name="CollisionShape3D" parent="Graphics/reptilemonster/Armature/Skeleton3D/Body/HitBoxHead" index="0"]
-transform = Transform3D(1, 2.84217e-14, 1.7053e-13, 0, 0.973775, -0.227518, -3.55271e-13, 0.227518, 0.973775, -0.00463501, 0.600966, 0.233119)
+transform = Transform3D(1.89308, 1.13687e-13, 6.25278e-13, 0, 1.37302, -0.3208, -6.25278e-13, 0.3208, 1.37302, -0.00463501, 0.658908, 0.227004)
 shape = SubResource("BoxShape3D_4yifc")
 
 [node name="UpperArmL" type="BoneAttachment3D" parent="Graphics/reptilemonster/Armature/Skeleton3D" index="2"]
@@ -149,6 +146,10 @@ bone_idx = 7
 [node name="CollisionShape3D" parent="Graphics/reptilemonster/Armature/Skeleton3D/LowerLegL/HitBox" index="0"]
 transform = Transform3D(1, -1.22935e-07, 2.98023e-08, 9.31323e-09, 1, -1.49012e-07, -1.49012e-08, 5.96046e-08, 1, -2.08616e-07, 0.170714, 0.00971547)
 shape = SubResource("CapsuleShape3D_5xnt4")
+
+[node name="AICharacterMover" parent="." index="5"]
+max_speed = 4.0
+move_accel = 2.0
 
 [editable path="Graphics/reptilemonster"]
 [editable path="Graphics/reptilemonster/Armature/Skeleton3D/Body/HitBox"]

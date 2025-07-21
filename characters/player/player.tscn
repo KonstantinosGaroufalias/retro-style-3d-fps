@@ -1,11 +1,10 @@
-[gd_scene load_steps=44 format=3 uid="uid://ch0oyqu7h8xkb"]
+[gd_scene load_steps=43 format=3 uid="uid://ch0oyqu7h8xkb"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_n0jxg"]
 [ext_resource type="Script" path="res://characters/player/weapons_manager.gd" id="2_dwjd2"]
 [ext_resource type="PackedScene" uid="uid://bpt4wmavk3wqe" path="res://characters/character_mover.tscn" id="2_ksela"]
 [ext_resource type="PackedScene" uid="uid://cfwy8adq8cpc7" path="res://weapons/assets/machete.glb" id="3_bl8av"]
 [ext_resource type="PackedScene" uid="uid://bg6rhdc2ketk2" path="res://weapons/assets/machinegun.glb" id="3_idi6v"]
-[ext_resource type="Script" path="res://characters/character_mover.gd" id="3_kasqi"]
 [ext_resource type="Script" path="res://weapons/weapon.gd" id="4_lnn3y"]
 [ext_resource type="PackedScene" uid="uid://c1mtqpil7ainc" path="res://characters/health_manager.tscn" id="4_ve1ay"]
 [ext_resource type="PackedScene" uid="uid://c1fqrl11sqrqy" path="res://weapons/assets/rocketlauncher.glb" id="5_1ipjr"]
@@ -359,7 +358,7 @@ script = ExtResource("2_dwjd2")
 [node name="Machete" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 visible = false
 script = ExtResource("4_lnn3y")
-damage = 10
+damage = 20
 ammo = -1
 attack_rate = 0.4
 animation_controlled_attack = true
@@ -408,6 +407,7 @@ stretch_mode = 2
 visible = false
 script = ExtResource("4_lnn3y")
 automatic = true
+ammo = 150
 attack_rate = 0.1
 
 [node name="Graphics" type="Node3D" parent="Camera3D/WeaponManager/Weapons/MachineGun"]
@@ -452,6 +452,7 @@ stretch_mode = 2
 [node name="Shotgun" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 visible = false
 script = ExtResource("4_lnn3y")
+damage = 8
 attack_rate = 1.0
 
 [node name="Graphics" type="Node3D" parent="Camera3D/WeaponManager/Weapons/Shotgun"]
@@ -500,7 +501,7 @@ stretch_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.103958, 0, -0.434381)
 visible = false
 script = ExtResource("4_lnn3y")
-damage = 40
+damage = 50
 ammo = 10
 attack_rate = 0.8
 
@@ -566,7 +567,6 @@ shape = SubResource("SphereShape3D_d6i3i")
 [node name="LOSRayCast3D" type="RayCast3D" parent="Camera3D/WeaponManager"]
 
 [node name="CharacterMover" parent="." instance=ExtResource("2_ksela")]
-script = ExtResource("3_kasqi")
 stop_drag = 0.15
 
 [node name="HealthManager" parent="." instance=ExtResource("4_ve1ay")]
