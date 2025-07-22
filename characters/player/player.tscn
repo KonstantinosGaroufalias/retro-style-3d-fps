@@ -571,6 +571,7 @@ stop_drag = 0.15
 
 [node name="HealthManager" parent="." instance=ExtResource("4_ve1ay")]
 script = ExtResource("5_xsyuv")
+gib_at = 10
 verbose = true
 
 [connection signal="moved" from="CharacterMover" to="Camera3D/WeaponManager" method="update_animation"]

@@ -38,10 +38,3 @@ func heal(amount: int):
 	health_changed.emit(cur_health, max_health)
 	if verbose:
 		print("healed for %s, health: %s/%s" % [amount, cur_health, max_health])
-
-
-func test_damage():
-	var d = DamageData.new()
-	d.amount = 30
-	hurt(d)
-	
