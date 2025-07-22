@@ -33,7 +33,10 @@ A fast-paced, old-school first-person shooter built with the Godot Game Engine, 
 ## Sample Gif
 
 
-https://github.com/user-attachments/assets/253b84d9-4923-4e53-97a6-2bed19d68b0c
+
+https://github.com/user-attachments/assets/a5326f45-2b2a-40a6-9ffc-ec9336066bf4
+
+
 
 
 ## 🛠️ Development
