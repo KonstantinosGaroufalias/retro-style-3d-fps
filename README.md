@@ -1,6 +1,6 @@
 # Retro Style 3D FPS - Godot Engine
 
-A fast-paced, old-school first-person shooter built with the Godot Game Engine, inspired by classic 90s FPS games. This project demonstrates core FPS mechanics including multiple weapons, enemy AI, particle effects, and retro-style gameplay[1][2].
+A fast-paced, old-school first-person shooter built with the Godot Game Engine, inspired by classic 90s FPS games. This project demonstrates core FPS mechanics including multiple weapons, enemy AI, particle effects, and retro-style gameplay.
 
 ## 🎮 Features
 
@@ -31,6 +31,10 @@ A fast-paced, old-school first-person shooter built with the Godot Game Engine, 
 
 
 ## Sample Gif
+
+
+https://github.com/user-attachments/assets/253b84d9-4923-4e53-97a6-2bed19d68b0c
+
 
 ## 🛠️ Development
 
@@ -68,10 +72,5 @@ A fast-paced, old-school first-person shooter built with the Godot Game Engine, 
 └── project.godot
 ```
 
-## 🎨 Assets & Credits
-
-- **Course Instructor**: Narayana Walters[3]
-- **Game Engine**: Godot Engine
-- **Development Tutorial**: Based on Udemy course content[3][1]
 
 
