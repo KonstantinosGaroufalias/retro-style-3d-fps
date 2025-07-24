@@ -570,9 +570,9 @@ shape = SubResource("SphereShape3D_d6i3i")
 stop_drag = 0.15
 
 [node name="HealthManager" parent="." instance=ExtResource("4_ve1ay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20879, 0)
 script = ExtResource("5_xsyuv")
 gib_at = 10
-verbose = true
 
 [connection signal="moved" from="CharacterMover" to="Camera3D/WeaponManager" method="update_animation"]
 

@@ -1,8 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6axfn8ojix81"]
+[gd_scene load_steps=12 format=3 uid="uid://b6axfn8ojix81"]
 
 [ext_resource type="PackedScene" uid="uid://caf5bpetmv4kt" path="res://characters/enemies/monster.tscn" id="1_6nccq"]
 [ext_resource type="PackedScene" uid="uid://c5ksaoke3l35i" path="res://characters/enemies/reptile_monster/reptilemonster.glb" id="2_q7nt7"]
 [ext_resource type="PackedScene" uid="uid://chvuni7rsqm0s" path="res://characters/hit_box.tscn" id="3_i7uiy"]
+[ext_resource type="PackedScene" uid="uid://bfoce5tairg7y" path="res://weapons/bullet_emitters/projectile_emitter.tscn" id="4_vxmbn"]
+
+[sub_resource type="GDScript" id="GDScript_t1auh"]
+script/source = "extends \"res://characters/enemies/monster.gd\"
+
+func start_attack():
+	super()
+	var target_pos = player.global_position + Vector3.UP * 1.5
+	var dir_to_player = attack_emitter.global_position.direction_to(target_pos)
+	if dir_to_player.is_equal_approx(Vector3.UP) or dir_to_player.is_equal_approx(Vector3.DOWN):
+		attack_emitter.look_at(target_pos, Vector3.RIGHT)
+	else:
+		attack_emitter.look_at(target_pos)
+"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dtp5m"]
 radius = 0.251585
@@ -28,26 +42,29 @@ radius = 0.0803017
 height = 0.592135
 
 [node name="ReptileMonster" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_6nccq")]
+script = SubResource("GDScript_t1auh")
 animation_player = NodePath("Graphics/reptilemonster/AnimationPlayer")
-attack_range = 1.5
+attack_range = 35.0
+damage = 20
+attack_speed_modifier = 0.5
 
 [node name="reptilemonster" parent="Graphics" index="0" instance=ExtResource("2_q7nt7")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Graphics/reptilemonster/Armature" index="0"]
 bones/0/position = Vector3(2.84689e-18, 0.948998, -0.0952437)
-bones/1/rotation = Quaternion(-0.0508511, -1.19055e-07, 6.06192e-09, 0.998706)
-bones/2/rotation = Quaternion(-0.0159527, 0.0119727, 0.940191, -0.340064)
-bones/3/rotation = Quaternion(0.341651, -0.0318196, -0.072225, 0.936507)
-bones/4/rotation = Quaternion(0.015953, 0.0119728, 0.940191, 0.340064)
-bones/5/rotation = Quaternion(0.341651, 0.0318196, 0.072225, 0.936507)
+bones/1/rotation = Quaternion(0.0832142, -1.16203e-07, 1.16313e-08, 0.996532)
+bones/2/rotation = Quaternion(-0.244775, 0.344367, 0.882441, -0.206868)
+bones/3/rotation = Quaternion(0.449291, -0.040083, -0.0679875, 0.889893)
+bones/4/rotation = Quaternion(0.244775, 0.344367, 0.882441, 0.206868)
+bones/5/rotation = Quaternion(0.449291, 0.040083, 0.0679874, 0.889892)
 bones/6/rotation = Quaternion(0.109396, 0.21695, 0.969592, -0.0292543)
 bones/7/rotation = Quaternion(-0.189951, 0.00372252, -0.0376172, 0.981066)
 bones/8/rotation = Quaternion(-0.109396, 0.21695, 0.969592, 0.0292543)
 bones/9/rotation = Quaternion(-0.189951, -0.00372252, 0.0376172, 0.981066)
 
 [node name="Body" type="BoneAttachment3D" parent="Graphics/reptilemonster/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 8.88178e-16, -2.38419e-07, -2.5024e-08, 0.994477, -0.104958, 2.37102e-07, 0.104958, 0.994477, 2.84689e-18, 1.20205, -0.042127)
+transform = Transform3D(1, -4.25214e-08, -2.29664e-07, -4.42135e-08, 0.931049, -0.364894, 2.29344e-07, 0.364894, 0.931049, 2.84689e-18, 1.20205, -0.042127)
 bone_name = "body"
 bone_idx = 1
 
@@ -65,7 +82,7 @@ transform = Transform3D(1.89308, 1.13687e-13, 6.25278e-13, 0, 1.37302, -0.3208, 
 shape = SubResource("BoxShape3D_4yifc")
 
 [node name="UpperArmL" type="BoneAttachment3D" parent="Graphics/reptilemonster/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.768204, 0.639067, -0.0381404, -0.634004, -0.767684, -0.0932756, -0.0888892, -0.0474735, 0.994909, 0.218738, 1.59086, 0.0117653)
+transform = Transform3D(-0.794582, 0.196512, -0.574476, -0.391239, -0.889262, 0.236948, -0.464297, 0.413032, 0.783475, 0.218738, 1.56265, 0.11293)
 bone_name = "upper_arm.l"
 bone_idx = 2
 
@@ -76,7 +93,7 @@ transform = Transform3D(1, -1.82074e-07, -1.49012e-08, 2.28174e-08, 1, -7.45058e
 shape = SubResource("CapsuleShape3D_lwjfm")
 
 [node name="LowerArmL" type="BoneAttachment3D" parent="Graphics/reptilemonster/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.859372, 0.371408, -0.351477, -0.506519, -0.712558, 0.48549, -0.0701327, 0.595246, 0.800477, 0.43137, 1.33543, -0.00403017)
+transform = Transform3D(-0.821426, -0.414675, -0.39154, -0.244304, -0.364509, 0.898581, -0.515339, 0.833773, 0.19811, 0.284122, 1.26677, 0.250355)
 bone_name = "lower_arm.l"
 bone_idx = 3
 
@@ -87,7 +104,7 @@ transform = Transform3D(1, -1.22935e-07, 5.21541e-08, 7.45058e-09, 1, -1.78814e-
 shape = SubResource("CapsuleShape3D_7g7i3")
 
 [node name="UpperArmR" type="BoneAttachment3D" parent="Graphics/reptilemonster/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.768204, -0.639067, 0.0381405, 0.634003, -0.767684, -0.0932756, 0.0888892, -0.0474735, 0.994909, -0.218738, 1.59086, 0.0117653)
+transform = Transform3D(-0.794582, -0.196512, 0.574476, 0.391239, -0.889262, 0.236948, 0.464297, 0.413032, 0.783475, -0.218738, 1.56265, 0.11293)
 bone_name = "upper_arm.r"
 bone_idx = 4
 
@@ -98,7 +115,7 @@ transform = Transform3D(1, -1.82074e-07, -1.49012e-08, 2.28174e-08, 1, -7.45058e
 shape = SubResource("CapsuleShape3D_lwjfm")
 
 [node name="LowerArmR" type="BoneAttachment3D" parent="Graphics/reptilemonster/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.859372, -0.371408, 0.351477, 0.506518, -0.712558, 0.48549, 0.0701327, 0.595246, 0.800477, -0.43137, 1.33543, -0.00403019)
+transform = Transform3D(-0.821426, 0.414675, 0.39154, 0.244304, -0.364509, 0.898581, 0.515339, 0.833773, 0.19811, -0.284122, 1.26677, 0.250355)
 bone_name = "lower_arm.r"
 bone_idx = 5
 
@@ -157,7 +174,10 @@ max_speed = 4.0
 move_accel = 2.0
 
 [node name="AttackEmitter" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14522, -0.829393)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38792, -0.476556)
+
+[node name="ProjectileEmitter" parent="AttackEmitter" index="0" instance=ExtResource("4_vxmbn")]
+projectile_type = 1
 
 [editable path="Graphics/reptilemonster"]
 [editable path="Graphics/reptilemonster/Armature/Skeleton3D/Body/HitBox"]

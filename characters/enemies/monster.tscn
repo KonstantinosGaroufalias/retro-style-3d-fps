@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://caf5bpetmv4kt"]
+[gd_scene load_steps=9 format=3 uid="uid://caf5bpetmv4kt"]
 
 [ext_resource type="Script" path="res://characters/enemies/monster.gd" id="1_6yeva"]
 [ext_resource type="PackedScene" uid="uid://c1mtqpil7ainc" path="res://characters/health_manager.tscn" id="2_ncj48"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://5n1spsypc1li" path="res://characters/vision_manager.tscn" id="4_wohwx"]
 [ext_resource type="PackedScene" uid="uid://c1t1o0gsjidvi" path="res://characters/enemies/ai_character_mover.tscn" id="5_mtl1t"]
 [ext_resource type="PackedScene" uid="uid://c5wg4gnyejteh" path="res://weapons/bullet_emitters/bullet_emitter.tscn" id="6_qdsoo"]
-[ext_resource type="PackedScene" uid="uid://c3tr07xydda6a" path="res://weapons/bullet_emitters/area_damage_emitter.tscn" id="7_5qb1h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8f1j0"]
 
@@ -19,8 +18,8 @@ collision_mask = 3
 script = ExtResource("1_6yeva")
 
 [node name="HealthManager" parent="." instance=ExtResource("2_ncj48")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2109, 0)
 script = ExtResource("3_chk41")
-verbose = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -42,5 +41,3 @@ shape = SubResource("SphereShape3D_phqto")
 [node name="AICharacterMover" parent="." instance=ExtResource("5_mtl1t")]
 
 [node name="AttackEmitter" parent="." instance=ExtResource("6_qdsoo")]
-
-[node name="AreaDamageEmitter" parent="AttackEmitter" instance=ExtResource("7_5qb1h")]

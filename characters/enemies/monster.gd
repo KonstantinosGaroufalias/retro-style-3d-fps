@@ -16,6 +16,7 @@ var cur_state = STATES.IDLE
 
 @export var attack_range = 2.0
 @export var damage = 15
+@export var attack_speed_modifier = 1.0
 
 func _ready():
 	var hitboxes = find_children("*", "HitBox")
@@ -73,7 +74,7 @@ func process_attack_state(delta):
 	if vec_to_player.length() <= attack_range:
 		ai_character_mover.stop_moving()
 		if !attacking and vision_manager.is_facing_target(player):
-			animation_player.play("attack")
+			start_attack()
 		elif !attacking:
 			ai_character_mover.set_facing_dir(vec_to_player)
 	elif !attacking:
@@ -81,6 +82,8 @@ func process_attack_state(delta):
 		ai_character_mover.move_to_point(player.global_position)
 		animation_player.play("walk", -1, 2.0)
 
+func start_attack():
+	animation_player.play("attack", -1, attack_speed_modifier)
 
 func do_attack(): # called from animation
 	attack_emitter.fire()
