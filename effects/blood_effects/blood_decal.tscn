@@ -15,5 +15,5 @@ mesh = SubResource("QuadMesh_ic1nv")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 size = Vector3(2, 0.2, 2)
 texture_albedo = ExtResource("1_ij81q")
-modulate = Color(0.231373, 0.0470588, 0.0470588, 1)
+modulate = Color(0.403922, 0.0470588, 0.0470588, 1)
 distance_fade_enabled = true

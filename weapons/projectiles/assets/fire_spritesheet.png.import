@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://es8xlqmq34g1"
-path.s3tc="res://.godot/imported/bird_texture.png-7cc7c0754a8910550cb26b62e9f3050d.s3tc.ctex"
+uid="uid://ybq8ikyardis"
+path.s3tc="res://.godot/imported/fire_spritesheet.png-d9a87cdc91e7034c5b97fba3b46d37b8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://characters/enemies/bird_monster/bird_texture.png"
-dest_files=["res://.godot/imported/bird_texture.png-7cc7c0754a8910550cb26b62e9f3050d.s3tc.ctex"]
+source_file="res://weapons/projectiles/assets/fire_spritesheet.png"
+dest_files=["res://.godot/imported/fire_spritesheet.png-d9a87cdc91e7034c5b97fba3b46d37b8.s3tc.ctex"]
 
 [params]
 

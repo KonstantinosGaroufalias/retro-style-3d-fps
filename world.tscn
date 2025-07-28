@@ -87,8 +87,16 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.02126, 0.758559, 0)
 
 [node name="ReptileMonster" parent="." instance=ExtResource("6_k7d4q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6666, 0.695284, 0)
-attack_range = 35.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7868, 0, 0)
 
 [node name="BirdMonster" parent="." instance=ExtResource("6_v15sq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6666, 0.657377, 3.07839)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.423127, 13.3166)
+
+[node name="BirdMonster2" parent="." instance=ExtResource("6_v15sq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.423127, 11.0668)
+
+[node name="BirdMonster3" parent="." instance=ExtResource("6_v15sq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.742, 0.423127, 11.0668)
+
+[node name="BirdMonster4" parent="." instance=ExtResource("6_v15sq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.12826, 0.423127, 14.9608)

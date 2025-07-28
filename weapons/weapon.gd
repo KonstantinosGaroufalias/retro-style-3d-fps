@@ -16,6 +16,7 @@ var last_attack_time = -9999.9
 
 @export var animation_controlled_attack = false
 
+@export var silent_weapon = false
 signal fired
 signal out_of_ammo
 
@@ -48,6 +49,7 @@ func attack(input_just_pressed: bool, input_held: bool):
 	last_attack_time = cur_time
 	animation_player.stop()
 	animation_player.play("shoot")
+	fired.emit()
 	if has_node("Graphics/MuzzleFlash"):
 		$Graphics/MuzzleFlash.flash()
 

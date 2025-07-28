@@ -1,6 +1,6 @@
 extends Projectile
 
-@onready var area_damage_emitter: Node3D = $AreaDamageEmitter
+@onready var area_damage_emitter = $AreaDamageEmitter
 
 func on_hit(hit_collider: Node3D, hit_pos: Vector3, hit_normal: Vector3):
 	super(hit_collider, hit_pos, hit_normal)

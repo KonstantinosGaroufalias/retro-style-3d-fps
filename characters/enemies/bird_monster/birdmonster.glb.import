@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b2i2siq8m6j0i"
+uid="uid://bi3lfkomdg1ou"
 path="res://.godot/imported/birdmonster.glb-237ef9b00e5cfdd1e311ab4fda8ce58d.scn"
 
 [deps]
@@ -13,8 +13,8 @@ dest_files=["res://.godot/imported/birdmonster.glb-237ef9b00e5cfdd1e311ab4fda8ce
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
@@ -36,7 +36,7 @@ _subresources={
 "attack": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "res://characters/enemies/bird_monster/attack_custom.res",
+"save_to_file/path": "res://characters/enemies/bird_monster/attack_custom.tres",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -1830,7 +1830,7 @@ _subresources={
 "slice_99/save_to_file/keep_custom_tracks": false,
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
-"slices/amount": 0
+"slices/amount": null
 }
 },
 "materials": {
@@ -1840,5 +1840,5 @@ _subresources={
 }
 }
 }
-gltf/naming_version=1
-gltf/embedded_image_handling=2
+gltf/naming_version=0
+gltf/embedded_image_handling=0

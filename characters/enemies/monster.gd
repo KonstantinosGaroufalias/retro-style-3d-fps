@@ -23,6 +23,7 @@ func _ready():
 	for hitbox in hitboxes:
 		hitbox.on_hurt.connect(health_manager.hurt)
 	health_manager.died.connect(set_state.bind(STATES.DEAD))
+	health_manager.gibbed.connect(queue_free)
 	
 	hitboxes.append(self)
 	attack_emitter.set_bodies_to_exclude(hitboxes)

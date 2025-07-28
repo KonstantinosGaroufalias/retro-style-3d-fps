@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://c1mtqpil7ainc"]
+[gd_scene load_steps=2 format=3 uid="uid://c1mtqpil7ainc"]
+
+[ext_resource type="Script" path="res://characters/health_manager.gd" id="1_kuyu2"]
 
 [node name="HealthManager" type="Node3D"]
+script = ExtResource("1_kuyu2")
 
 [node name="BloodRaycast" type="RayCast3D" parent="."]
 enabled = false
