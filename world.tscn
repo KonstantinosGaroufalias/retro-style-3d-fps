@@ -57,7 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3.95079, -21.5856, -2.32767, -9.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3.95079, 82.0371, -2.32767, -9.08385)
 
 [node name="RockCliff3" parent="Environment" instance=ExtResource("2_4ucfr")]
-transform = Transform3D(-4.37114e-08, 0, -3.95079, 0, 1, 0, 1, 0, -1.72695e-07, 27.6274, -6.0288, 44.7259)
+transform = Transform3D(-4.37114e-08, 0, -3.95079, 0, 1, 0, 1, 0, -1.72695e-07, 27.6274, -6.0288, 39.53)
 
 [node name="RockCliff4" parent="Environment" instance=ExtResource("2_4ucfr")]
 transform = Transform3D(-4.37114e-08, 0, -3.95079, 0, 1, 0, 1, 0, -1.72695e-07, 27.6274, -6.0288, -58.8896)
