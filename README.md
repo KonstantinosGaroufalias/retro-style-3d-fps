@@ -2,6 +2,8 @@
 
 A fast-paced, old-school first-person shooter built with the Godot Game Engine, inspired by classic 90s FPS games. This project demonstrates core FPS mechanics including multiple weapons, enemy AI, particle effects, and retro-style gameplay.
 
+Try the Demo HERE : https://walter-garis.itch.io/retrostylefps
+
 ## 🎮 Features
 
 ### **Gameplay**
