@@ -56,24 +56,6 @@ https://github.com/user-attachments/assets/a5326f45-2b2a-40a6-9ffc-ec9336066bf4
 - **AI**: State machine with pathfinding
 - **Physics**: Kinematic body movement system
 
-## 📁 Project Structure
-
-```
-├── scenes/
-│   ├── Player/
-│   ├── Weapons/
-│   ├── Enemies/
-│   └── Environment/
-├── scripts/
-│   ├── player_controller.gd
-│   ├── weapon_manager.gd
-│   └── enemy_ai.gd
-├── assets/
-│   ├── models/
-│   ├── textures/
-│   └── sounds/
-└── project.godot
-```
 
 
 
