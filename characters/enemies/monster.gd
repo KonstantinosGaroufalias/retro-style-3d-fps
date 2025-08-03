@@ -36,6 +36,7 @@ func hurt(damage_data: DamageData):
 
 func alert():
 	if cur_state == STATES.IDLE:
+		$AlertSound.play()
 		set_state(STATES.ATTACK)
 		alert_nearby_monsters()
 
@@ -64,11 +65,11 @@ func _process(delta):
 		STATES.ATTACK:
 			process_attack_state(delta)
 
-func process_idle_state(delta):
+func process_idle_state(_delta):
 	if vision_manager.can_see_target(player):
 		alert()
 
-func process_attack_state(delta):
+func process_attack_state(_delta):
 	var attacking = animation_player.current_animation == "attack"
 	var vec_to_player = player.global_position - global_position
 	
@@ -84,6 +85,7 @@ func process_attack_state(delta):
 		animation_player.play("walk", -1, 2.0)
 
 func start_attack():
+	$AttackSound.play()
 	animation_player.play("attack", -1, attack_speed_modifier)
 
 func do_attack(): # called from animation

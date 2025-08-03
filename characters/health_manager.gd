@@ -58,9 +58,11 @@ func hurt(damage_data: DamageData):
 		if verbose:
 			print("died")
 		died.emit()
+		$DieSound.play()
 		if damage_taken_this_frame >= gib_when_damage_taken:
 			gib()
 	else:
+		$HurtSound.play()
 		damaged.emit()
 	health_changed.emit(cur_health, max_health)
 	if verbose:

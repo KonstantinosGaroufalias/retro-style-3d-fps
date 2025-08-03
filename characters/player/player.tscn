@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ch0oyqu7h8xkb"]
+[gd_scene load_steps=73 format=3 uid="uid://ch0oyqu7h8xkb"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_n0jxg"]
 [ext_resource type="Script" path="res://characters/player/weapons_manager.gd" id="2_dwjd2"]
@@ -15,13 +15,32 @@
 [ext_resource type="PackedScene" uid="uid://d311ewusfl6en" path="res://effects/muzzle_flash/assets/muzzleflash1.glb" id="7_kh7tx"]
 [ext_resource type="Texture2D" uid="uid://cpq0mjr6epgv2" path="res://weapons/crosshairs/crosshair001.png" id="8_juiht"]
 [ext_resource type="PackedScene" uid="uid://bb6bfvnmtsadm" path="res://weapons/bullet_emitters/hit_scan_bullet_emitter.tscn" id="8_k1n4w"]
+[ext_resource type="Script" path="res://sfx/play_random_sound.gd" id="9_j0cdg"]
+[ext_resource type="AudioStream" uid="uid://d0rbb84w45p76" path="res://sfx/weapons/melee_attack.wav" id="10_niq7q"]
 [ext_resource type="PackedScene" uid="uid://yu6miwctdlpc" path="res://weapons/bullet_emitters/burst_emitter.tscn" id="11_txht7"]
 [ext_resource type="Texture2D" uid="uid://boeplm3x2vkuo" path="res://weapons/crosshairs/crosshair065.png" id="12_qf7xi"]
 [ext_resource type="PackedScene" uid="uid://b7oqitiwylshk" path="res://weapons/bullet_emitters/spray_emitter.tscn" id="12_y7v67"]
 [ext_resource type="PackedScene" uid="uid://2iq8r8cwtwbn" path="res://effects/muzzle_flash/assets/muzzleflash2.glb" id="15_oem8n"]
+[ext_resource type="AudioStream" uid="uid://dt74me443hg4k" path="res://sfx/weapons/out_of_ammo_click.wav" id="16_0l388"]
 [ext_resource type="Texture2D" uid="uid://bpp3opwsmheqk" path="res://weapons/crosshairs/crosshair066.png" id="16_d17e5"]
 [ext_resource type="PackedScene" uid="uid://bfoce5tairg7y" path="res://weapons/bullet_emitters/projectile_emitter.tscn" id="16_qakut"]
+[ext_resource type="AudioStream" uid="uid://0wlvpnfatuk6" path="res://sfx/weapons/gun_fire.wav" id="17_3haqe"]
 [ext_resource type="Texture2D" uid="uid://56aynbx7ton2" path="res://weapons/crosshairs/crosshair026.png" id="17_l4o8w"]
+[ext_resource type="Script" path="res://characters/player/pickup_manager.gd" id="23_cvw40"]
+[ext_resource type="Script" path="res://characters/player/death_screen.gd" id="24_0i1dw"]
+[ext_resource type="AudioStream" uid="uid://e5o4foaqr6lt" path="res://sfx/player/heal.wav" id="24_h7x1u"]
+[ext_resource type="Script" path="res://characters/player/health_effects.gd" id="24_u7ivr"]
+[ext_resource type="AudioStream" uid="uid://c3uttsnm4pmwj" path="res://sfx/weapons/pickup_ammo.wav" id="25_3dht4"]
+[ext_resource type="AudioStream" uid="uid://ojofpni6xpq2" path="res://sfx/weapons/equip_weapon.wav" id="25_c0nn8"]
+[ext_resource type="Script" path="res://characters/player/pickup_info.gd" id="25_e3x66"]
+[ext_resource type="Theme" uid="uid://cv1m1yn6evubh" path="res://ui/main_theme.tres" id="25_l1wqo"]
+[ext_resource type="AudioStream" uid="uid://34xo8tjtly1t" path="res://sfx/weapons/rocket_laucher_shoot.wav" id="26_go0lu"]
+[ext_resource type="Script" path="res://characters/player/stats_display.gd" id="26_nbsy2"]
+[ext_resource type="Script" path="res://characters/player/step_tracker.gd" id="28_v7y4v"]
+[ext_resource type="AudioStream" uid="uid://d4hp153huc8tf" path="res://sfx/steps/step_1.wav" id="29_l4w31"]
+[ext_resource type="AudioStream" uid="uid://coeq6i33cxnrh" path="res://sfx/player/player_hurt.wav" id="29_pph4w"]
+[ext_resource type="AudioStream" uid="uid://dra4tmxg5qiip" path="res://sfx/steps/step_2.wav" id="30_awlt1"]
+[ext_resource type="AudioStream" uid="uid://budrcurc1yu7j" path="res://sfx/player/player_die.wav" id="30_lohhk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mkonh"]
 
@@ -328,6 +347,107 @@ radius = 15.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_d6i3i"]
 radius = 50.0
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i836d"]
+
+[sub_resource type="Animation" id="Animation_ir8gd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v8x0i"]
+resource_name = "flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.184314), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ycjyg"]
+_data = {
+"RESET": SubResource("Animation_ir8gd"),
+"flash": SubResource("Animation_v8x0i")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_wnje1"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_x3yvs"]
+font_size = 86
+
+[sub_resource type="Animation" id="Animation_qsx68"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_un1nb"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uvs7e"]
+_data = {
+"RESET": SubResource("Animation_qsx68"),
+"fade_in": SubResource("Animation_un1nb")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_oxgm8"]
+font_size = 70
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_me1gv"]
+bg_color = Color(0.6, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_767tf"]
+bg_color = Color(0, 0.92549, 0.054902, 1)
+border_width_right = 2
+border_color = Color(0, 0.431373, 0.054902, 1)
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 6
 collision_mask = 3
@@ -349,6 +469,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 unique_name_in_owner = true
 
 [node name="WeaponManager" type="Node3D" parent="Camera3D"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.705974)
 script = ExtResource("2_dwjd2")
 
@@ -402,6 +523,24 @@ size_flags_horizontal = 4
 texture = ExtResource("8_juiht")
 stretch_mode = 2
 
+[node name="EquipSound" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Machete"]
+stream = ExtResource("25_c0nn8")
+pitch_scale = 3.09
+
+[node name="AttackSounds" type="Node3D" parent="Camera3D/WeaponManager/Weapons/Machete"]
+script = ExtResource("9_j0cdg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Machete/AttackSounds"]
+stream = ExtResource("10_niq7q")
+pitch_scale = 1.2
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Machete/AttackSounds"]
+stream = ExtResource("10_niq7q")
+pitch_scale = 0.75
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Machete/AttackSounds"]
+stream = ExtResource("10_niq7q")
+
 [node name="MachineGun" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 visible = false
 script = ExtResource("4_lnn3y")
@@ -447,6 +586,29 @@ scale = Vector2(0.825, 0.825)
 size_flags_horizontal = 4
 texture = ExtResource("12_qf7xi")
 stretch_mode = 2
+
+[node name="EquipSound" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/MachineGun"]
+stream = ExtResource("25_c0nn8")
+pitch_scale = 1.54
+
+[node name="OutOfAmmoSound" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/MachineGun"]
+stream = ExtResource("16_0l388")
+pitch_scale = 1.54
+
+[node name="AttackSounds" type="Node3D" parent="Camera3D/WeaponManager/Weapons/MachineGun"]
+script = ExtResource("9_j0cdg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/MachineGun/AttackSounds"]
+stream = ExtResource("17_3haqe")
+pitch_scale = 1.7
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/MachineGun/AttackSounds"]
+stream = ExtResource("17_3haqe")
+pitch_scale = 1.65
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/MachineGun/AttackSounds"]
+stream = ExtResource("17_3haqe")
+pitch_scale = 1.8
 
 [node name="Shotgun" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 visible = false
@@ -496,6 +658,28 @@ size_flags_horizontal = 4
 texture = ExtResource("16_d17e5")
 stretch_mode = 2
 
+[node name="EquipSound" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Shotgun"]
+stream = ExtResource("25_c0nn8")
+pitch_scale = 0.7
+
+[node name="OutOfAmmoSound" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Shotgun"]
+stream = ExtResource("16_0l388")
+pitch_scale = 0.4
+
+[node name="AttackSounds" type="Node3D" parent="Camera3D/WeaponManager/Weapons/Shotgun"]
+script = ExtResource("9_j0cdg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Shotgun/AttackSounds"]
+stream = ExtResource("17_3haqe")
+pitch_scale = 0.9
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Shotgun/AttackSounds"]
+stream = ExtResource("17_3haqe")
+pitch_scale = 0.85
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/Shotgun/AttackSounds"]
+stream = ExtResource("17_3haqe")
+
 [node name="RocketLauncher" type="Node3D" parent="Camera3D/WeaponManager/Weapons"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.103958, 0, -0.434381)
 visible = false
@@ -541,6 +725,28 @@ size_flags_horizontal = 4
 texture = ExtResource("17_l4o8w")
 stretch_mode = 2
 
+[node name="EquipSound" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/RocketLauncher"]
+stream = ExtResource("25_c0nn8")
+pitch_scale = 0.6
+
+[node name="OutOfAmmoSound" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/RocketLauncher"]
+stream = ExtResource("16_0l388")
+pitch_scale = 0.4
+
+[node name="AttackSounds" type="Node3D" parent="Camera3D/WeaponManager/Weapons/RocketLauncher"]
+script = ExtResource("9_j0cdg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/RocketLauncher/AttackSounds"]
+stream = ExtResource("26_go0lu")
+pitch_scale = 0.7
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/RocketLauncher/AttackSounds"]
+stream = ExtResource("26_go0lu")
+pitch_scale = 0.85
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Camera3D/WeaponManager/Weapons/RocketLauncher/AttackSounds"]
+stream = ExtResource("26_go0lu")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D/WeaponManager"]
 root_node = NodePath("../Weapons")
 libraries = {
@@ -568,9 +774,232 @@ shape = SubResource("SphereShape3D_d6i3i")
 [node name="CharacterMover" parent="." instance=ExtResource("2_ksela")]
 stop_drag = 0.15
 
+[node name="JumpSound" type="AudioStreamPlayer" parent="CharacterMover"]
+bus = &"Sfx"
+
+[node name="StepTracker" type="Node3D" parent="CharacterMover"]
+script = ExtResource("28_v7y4v")
+
+[node name="StepSounds" type="Node3D" parent="CharacterMover/StepTracker"]
+script = ExtResource("9_j0cdg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharacterMover/StepTracker/StepSounds"]
+stream = ExtResource("29_l4w31")
+volume_db = -11.0
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="CharacterMover/StepTracker/StepSounds"]
+stream = ExtResource("30_awlt1")
+volume_db = -11.0
+bus = &"Sfx"
+
 [node name="HealthManager" parent="." instance=ExtResource("4_ve1ay")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20879, 0)
-max_health = 1000
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="HealthManager"]
+stream = ExtResource("29_pph4w")
+bus = &"Sfx"
+
+[node name="DieSound" type="AudioStreamPlayer" parent="HealthManager"]
+stream = ExtResource("30_lohhk")
+bus = &"Sfx"
+
+[node name="PickupManager" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+script = ExtResource("23_cvw40")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupManager"]
+transform = Transform3D(1.64, 0, 0, 0, 1.64, 0, 0, 0, 1.64, 0, 0.978203, 0)
+shape = SubResource("CapsuleShape3D_i836d")
+
+[node name="PickupHealth" type="AudioStreamPlayer" parent="PickupManager"]
+stream = ExtResource("24_h7x1u")
+volume_db = -8.509
+bus = &"Sfx"
+
+[node name="PickupMGAmmo" type="AudioStreamPlayer" parent="PickupManager"]
+stream = ExtResource("25_3dht4")
+pitch_scale = 0.6
+bus = &"Sfx"
+
+[node name="PickupSGAmmo" type="AudioStreamPlayer" parent="PickupManager"]
+stream = ExtResource("25_3dht4")
+pitch_scale = 1.33
+bus = &"Sfx"
+
+[node name="PickupRLAmmo" type="AudioStreamPlayer" parent="PickupManager"]
+stream = ExtResource("25_3dht4")
+pitch_scale = 0.71
+bus = &"Sfx"
+
+[node name="PlayerUILayer" type="CanvasLayer" parent="."]
+
+[node name="HealthEffects" type="Control" parent="PlayerUILayer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_u7ivr")
+
+[node name="Heal" type="ColorRect" parent="PlayerUILayer/HealthEffects"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.843137, 0.054902, 1)
+
+[node name="Hurt" type="ColorRect" parent="PlayerUILayer/HealthEffects"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.705882, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerUILayer/HealthEffects"]
+libraries = {
+"": SubResource("AnimationLibrary_ycjyg")
+}
+
+[node name="PickupInfo" type="Label" parent="PlayerUILayer"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 0.286275, 1)
+offset_right = 390.0
+offset_bottom = 247.0
+label_settings = SubResource("LabelSettings_wnje1")
+script = ExtResource("25_e3x66")
+
+[node name="DeathScreen" type="Control" parent="PlayerUILayer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_0i1dw")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerUILayer/DeathScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.184314)
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="PlayerUILayer/DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.5
+offset_top = -175.0
+offset_right = 272.5
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="PlayerUILayer/DeathScreen/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 19.0
+grow_horizontal = 2
+text = "You Died"
+label_settings = SubResource("LabelSettings_x3yvs")
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="PlayerUILayer/DeathScreen/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -129.0
+offset_top = -159.0
+offset_right = 129.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Restart"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerUILayer/DeathScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_uvs7e")
+}
+
+[node name="StatsDisplay" type="Control" parent="PlayerUILayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -244.0
+offset_right = 510.0
+grow_vertical = 0
+theme = ExtResource("25_l1wqo")
+script = ExtResource("26_nbsy2")
+
+[node name="AmmoDisplay" type="Label" parent="PlayerUILayer/StatsDisplay"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -175.0
+offset_right = 414.0
+offset_bottom = -66.0
+grow_vertical = 0
+text = "AMMO : 0"
+label_settings = SubResource("LabelSettings_oxgm8")
+
+[node name="HealthDisplay" type="ProgressBar" parent="PlayerUILayer/StatsDisplay"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 154.0
+offset_top = -69.0
+offset_right = 481.0
+offset_bottom = -14.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_me1gv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_767tf")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="HP" type="Label" parent="PlayerUILayer/StatsDisplay/HealthDisplay"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -91.0
+offset_right = 51.0
+offset_bottom = 18.0
+grow_vertical = 0
+text = "HP :"
+label_settings = SubResource("LabelSettings_oxgm8")
+vertical_alignment = 1
 
 [connection signal="moved" from="CharacterMover" to="Camera3D/WeaponManager" method="update_animation"]
 

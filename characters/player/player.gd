@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var character_mover = $CharacterMover
 @onready var health_manager = $HealthManager
 @onready var weapon_manager = $Camera3D/WeaponManager
+@onready var death_screen = $PlayerUILayer/DeathScreen
 
 @export var mouse_sensitivity_h = 0.15
 @export var mouse_sensitivity_v = 0.15
@@ -73,6 +74,7 @@ func _process(_delta):
 func kill():
 	dead = true
 	character_mover.set_move_dir(Vector3.ZERO)
+	death_screen.show_death_screen()
 
 func hurt(damage_data: DamageData):
 	health_manager.hurt(damage_data)

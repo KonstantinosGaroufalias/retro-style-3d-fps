@@ -54,6 +54,18 @@ blood_splatter_range = 3.0
 blood_splatter_size_variance = 0.75
 gib_spawn_amnt = 8
 
+[node name="DieSound" parent="HealthManager" index="1"]
+pitch_scale = 0.65
+
+[node name="HurtSound" parent="HealthManager/HurtSound" index="0"]
+pitch_scale = 0.7
+
+[node name="HurtSound2" parent="HealthManager/HurtSound" index="1"]
+pitch_scale = 0.8
+
+[node name="HurtSound3" parent="HealthManager/HurtSound" index="2"]
+pitch_scale = 0.65
+
 [node name="reptilemonster" parent="Graphics" index="0" instance=ExtResource("2_q7nt7")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
@@ -184,6 +196,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38792, -0.476556)
 
 [node name="ProjectileEmitter" parent="AttackEmitter" index="0" instance=ExtResource("4_vxmbn")]
 projectile_type = 1
+
+[node name="AlertSound" parent="." index="7"]
+pitch_scale = 0.65
+
+[node name="AttackSound" parent="." index="8"]
+pitch_scale = 0.65
 
 [editable path="Graphics/reptilemonster"]
 [editable path="Graphics/reptilemonster/Armature/Skeleton3D/Body/HitBox"]
