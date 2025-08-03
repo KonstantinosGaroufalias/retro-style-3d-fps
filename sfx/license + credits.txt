@@ -1,0 +1,11 @@
+all files are CC0
+sounds from: https://opengameart.org/content/16-monster-growls
+https://opengameart.org/content/5-hit-sounds-dying
+https://opengameart.org/content/swish-bamboo-stick-weapon-swhoshes
+https://opengameart.org/content/handgun-reload-sound-effect
+https://opengameart.org/content/gun-reload-sounds
+https://opengameart.org/content/battle-at-sea
+https://opengameart.org/content/magic-words-healing-sound-effect
+https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
+
+A few of the sounds (out_of_ammo_click, gun_fire, rocket_laucher_shoot) are from my game Endoparasitic, which I'm putting under CC0 license
